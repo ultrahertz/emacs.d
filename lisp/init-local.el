@@ -35,12 +35,12 @@
 (set-cursor-color "#999999")
 
 ;;* Org mode
-(defvar ora-org-basedir "~/priv/org/")
+(defvar ora-org-basedir "~/org/")
 
 (defun ora-org-expand (file)
   (expand-file-name file ora-org-basedir))
 (setq org-agenda-files
-      (mapcar #'ora-org-expand '("todo.org" "gtd.org" "ent.org")))
+      (mapcar #'ora-org-expand '("todo.org" "gtd.org" "work.org")))
 
 (setq diary-file (ora-org-expand "diary"))
 (setq org-agenda-include-diary t)
@@ -51,6 +51,15 @@
              :config
              (setq pow-directory
                    (ora-org-expand "wiki/")))
+
+(global-unset-key (kbd "C-x m"))
+(global-unset-key (kbd "C-x C-m"))
+(global-unset-key (kbd "C-x j"))
+(global-unset-key (kbd "C-x p"))
+
+(global-set-key (kbd "C-x m") 'eshell)
+(global-set-key (kbd "C-x C-n") 'elfeed)
+(global-set-key (kbd "C-x C-m") 'smex)
 
 (require 'elfeed)
 (setq elfeed-feeds
