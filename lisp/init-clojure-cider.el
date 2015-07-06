@@ -1,4 +1,5 @@
 (require 'init-clojure)
+(require 'clojure-mode-extra-font-locking)
 (require-package 'emacs '(24))
 
 (require-package 'cider)
@@ -15,6 +16,24 @@
   (add-hook 'cider-mode-hook 'ac-cider-setup)
   (after-load 'auto-complete
     (add-to-list 'ac-modes 'cider-repl-mode))
+
+  (add-hook 'clojure-mode-hook
+            (lambda ()
+              (setq inferior-lisp-program "lein repl")
+              (font-lock-add-keywords
+               nil
+               '(("(\\(facts?\\)"
+                  (1 font-lock-keyword-face))
+                 ("(\\(background?\\)"
+                  (1 font-lock-keyword-face))))
+              (define-clojure-indent (fact 1))
+              (define-clojure-indent (facts 1))))
+
+  (setq cider-repl-use-pretty-printing t
+        cider-repl-result-prefix ";; => "
+        cider-repl-wrap-history t
+        cider-repl-history-file "~/.emacs.d/cider-history")
+
 
   (add-hook 'cider-repl-mode-hook 'set-auto-complete-as-completion-at-point-function)
   (add-hook 'cider-mode-hook 'set-auto-complete-as-completion-at-point-function)

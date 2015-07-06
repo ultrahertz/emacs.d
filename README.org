@@ -1,0 +1,19 @@
+
+* My emacs configuration
+
+** The first 95% 
+
+ is shamelessly stolen from [[https://github.com/purcell/emacs.d][Steve Purcell's]] pretty kick-ass config.
+
+** SLIME
+
+ There's a few changes to init-slime.el
+
+** CIDER
+
+ A few extra options in the CIDER config, purely aesthetic.
+
+** The rest
+
+ Anything else should be in =~/.emacs.d/lisp/init-local.el=.
+
